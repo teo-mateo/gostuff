@@ -1,24 +1,21 @@
 package treesortz
 
-import (
-	"fmt"
-)
-
 type tree struct {
 	value       int
 	left, right *tree
+	count       int
 }
 
+// Sort ...
 func Sort(values []int) {
 	var t *tree
-	fmt.Println(t)
-
 	for _, v := range values {
 		t = add(t, v)
 	}
 
 	values = values[:0]
 	appendValues(values, t)
+
 }
 
 // appendValues appends the elements of t to values in order
@@ -29,27 +26,29 @@ func appendValues(values []int, t *tree) []int {
 		values = appendValues(values, t.left)
 	}
 
-	values = append(values, t.value)
+	for i := 0; i < t.count; i++ {
+		values = append(values, t.value)
+	}
 
 	if t.right != nil {
-		appendValues(values, t.right)
+		values = appendValues(values, t.right)
 	}
 
 	return values
-
 }
 
 func add(t *tree, value int) *tree {
 	if t == nil {
-		t = new(tree)
+		t = &tree{count: 1}
 		t.value = value
 		return t
 	}
 
-	if value < t.value {
+	if value == t.value {
+		t.count++
+	} else if value < t.value {
 		t.left = add(t.left, value)
-	}
-	if value > t.value {
+	} else if value > t.value {
 		t.right = add(t.right, value)
 	}
 
