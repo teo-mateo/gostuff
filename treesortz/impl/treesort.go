@@ -12,10 +12,8 @@ func Sort(values []int) {
 	for _, v := range values {
 		t = add(t, v)
 	}
-
 	values = values[:0]
 	appendValues(values, t)
-
 }
 
 // appendValues appends the elements of t to values in order
@@ -23,17 +21,15 @@ func Sort(values []int) {
 func appendValues(values []int, t *tree) []int {
 
 	if t.left != nil {
-		values = appendValues(values, t.left)
+		appendValues(values, t.left)
 	}
 
 	for i := 0; i < t.count; i++ {
 		values = append(values, t.value)
 	}
-
 	if t.right != nil {
 		values = appendValues(values, t.right)
 	}
-
 	return values
 }
 
