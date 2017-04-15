@@ -18,25 +18,22 @@ func Sort(values []int) {
 	}
 
 	values = values[:0]
-	appendValues(values, t)
+	appendValues(&values, t)
 }
 
 // appendValues appends the elements of t to values in order
 // and returns the resulting slice
-func appendValues(values []int, t *tree) []int {
+func appendValues(values *[]int, t *tree) {
 
 	if t.left != nil {
-		values = appendValues(values, t.left)
+		appendValues(values, t.left)
 	}
 
-	values = append(values, t.value)
+	*values = append((*values), t.value)
 
 	if t.right != nil {
 		appendValues(values, t.right)
 	}
-
-	return values
-
 }
 
 func add(t *tree, value int) *tree {
