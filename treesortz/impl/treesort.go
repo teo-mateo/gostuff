@@ -9,6 +9,7 @@ type tree struct {
 	left, right *tree
 }
 
+//Sort ...
 func Sort(values []int) {
 	var t *tree
 	fmt.Println(t)
@@ -18,18 +19,18 @@ func Sort(values []int) {
 	}
 
 	values = values[:0]
-	appendValues(&values, t)
+	appendValues(values, t)
 }
 
 // appendValues appends the elements of t to values in order
 // and returns the resulting slice
-func appendValues(values *[]int, t *tree) {
+func appendValues(values []int, t *tree) {
 
 	if t.left != nil {
 		appendValues(values, t.left)
 	}
 
-	*values = append((*values), t.value)
+	values[len(values)] = t.value
 
 	if t.right != nil {
 		appendValues(values, t.right)
