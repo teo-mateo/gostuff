@@ -29,9 +29,18 @@ type IssueSearchResult struct {
 	Items		[]*Issue
 }
 
-func SearchIssues(terms []string) (*IssueSearchResult, error){
-	query := url.QueryEscape(strings.Join(terms, " "))
+func SearchIssues(ageMonths int, terms []string) (*IssueSearchResult, error){
+	
+	t := time.Now().AddDate(0, -ageMonths, 0)
+	aMonthAgo := "created:>=" + t.Format("2006-01-02")
+	query := strings.Join(terms, " ")
+	query = strings.Join([]string {query, aMonthAgo}, " ")
+	fmt.Println(query)
+	query = url.QueryEscape(query)
 	query = IssuesURL + "?q=" + query
+	fmt.Println(IssuesURL + "?q=" + query)
+	
+
 	resp, err := http.Get(query)
 	if err != nil{
 		return nil, err

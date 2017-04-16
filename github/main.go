@@ -4,11 +4,14 @@ import (
 	"fmt"
 	"os"
 	"log"
+	"strconv"
 	github "github.com/teo-mateo/gostuff/github/impl"
 )
 
 func main(){
-	result, err := github.SearchIssues(os.Args[1:])
+
+	ageMonths, _ := strconv.ParseInt(os.Args[1], 10, 8)
+	result, err := github.SearchIssues(int(ageMonths), os.Args[2:])
 	if err != nil{
 		log.Fatal(err)
 	}
