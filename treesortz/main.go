@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	values := []int{2, 44, 3, 6, 55, 17, 19, 6, 3}
+	values := []int{2, 44, 3, 6, 55, 17, 19, 6, 3, 8, 1}
 	treesortz.Sort(values)
 	fmt.Println(values)
 }
