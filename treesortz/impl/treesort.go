@@ -6,11 +6,7 @@ type tree struct {
 	count       int
 }
 
-<<<<<<< HEAD
-//Sort ...
-=======
 // Sort ...
->>>>>>> 4c4086c1fa00138e6c8d30d047cc22095c776248
 func Sort(values []int) {
 	var t *tree
 	for _, v := range values {
@@ -22,24 +18,17 @@ func Sort(values []int) {
 
 // appendValues appends the elements of t to values in order
 // and returns the resulting slice
-<<<<<<< HEAD
-func appendValues(values []int, t *tree) {
-=======
+
 func appendValues(values []int, t *tree) []int {
->>>>>>> 4c4086c1fa00138e6c8d30d047cc22095c776248
 
 	if t.left != nil {
 		appendValues(values, t.left)
 	}
 
-<<<<<<< HEAD
-	values[len(values)] = t.value
-
-=======
 	for i := 0; i < t.count; i++ {
 		values = append(values, t.value)
 	}
->>>>>>> 4c4086c1fa00138e6c8d30d047cc22095c776248
+
 	if t.right != nil {
 		values = appendValues(values, t.right)
 	}
