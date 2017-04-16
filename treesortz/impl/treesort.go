@@ -22,7 +22,7 @@ func Sort(values []int) {
 func appendValues(values []int, t *tree) []int {
 
 	if t.left != nil {
-		appendValues(values, t.left)
+		values = appendValues(values, t.left)
 	}
 
 	for i := 0; i < t.count; i++ {
