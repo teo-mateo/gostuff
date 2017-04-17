@@ -10,6 +10,7 @@ var vectorLength int
 
 func main(){
 	var x, y IntSet
+	x.Add(1)
 	x.Add(64)
 	fmt.Printf("x: %s\n", x.Binary())
 	y.Add(5)
@@ -22,9 +23,19 @@ func main(){
 	fmt.Println("after union:")
 	fmt.Printf("x: %s\n", x.Binary())
 
-	fmt.Println(x.String())
+	
 
 	fmt.Println("x has 15? ", x.Has(15))
+	fmt.Println("length of x: ", x.Len())
+	fmt.Println(x.String())
+	x.Remove(1)
+	fmt.Println(x.String())
+	
+	z := x.Copy()
+	z.Clear()
+	z.Add(66)
+	fmt.Println("x:", x.String())
+	fmt.Println("z:", z.String())
 }
 
 // An IntSet is a set of small non-negative integers.
@@ -85,6 +96,33 @@ func (s *IntSet) UnionWith (t *IntSet){
 	}
 }
 
+//Len ...
+func (s *IntSet) Len() int{
+	len := 0
+	for _, word := range s.words{
+		var bit uint
+		for ; bit < 64; bit++{
+			if word & (1 << bit) != 0{
+				len++
+			}
+		}
+	}
+	return len
+}
+
+//Remove ...
+func (s *IntSet) Remove(x int){
+	word, bit := x/64, x%64
+
+	for i :=0; i <= word; i++{
+		s.words[i] = s.words[i] &^ (1 << uint(bit))
+	}
+}
+
+func (s *IntSet) Clear(){
+	s.words = make([]uint64, 0)
+}
+
 //String returns the set as a string of the form "{1 2 3}"
 func (s *IntSet) String() string{
 	var buf bytes.Buffer
@@ -106,3 +144,8 @@ func (s *IntSet) String() string{
 	return buf.String()
 }
 
+//Copy ...
+func (s *IntSet) Copy() (t IntSet){
+	copy(t.words, s.words)
+	return t
+}
