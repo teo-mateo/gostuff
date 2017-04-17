@@ -36,6 +36,10 @@ func main(){
 	z.Add(66)
 	fmt.Println("x:", x.String())
 	fmt.Println("z:", z.String())
+
+	z.AddAll(1, 2, 3, 4)
+	fmt.Println("z:", z.String())
+
 }
 
 // An IntSet is a set of small non-negative integers.
@@ -148,4 +152,11 @@ func (s *IntSet) String() string{
 func (s *IntSet) Copy() (t IntSet){
 	copy(t.words, s.words)
 	return t
+}
+
+//AddAll ...
+func (s *IntSet) AddAll(x ...int){
+	for _, x := range x{
+		s.Add(x)
+	}
 }
