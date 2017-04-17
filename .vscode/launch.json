@@ -8,7 +8,11 @@
             "mode": "debug",
             "program": "${workspaceRoot}/github",
             "args": [
-                "test"
+                "12",
+                "repo:golang/go",
+                "is:open",
+                "json",
+                "decoder"
             ]            
         },
         {
